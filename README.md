@@ -1,24 +1,39 @@
-# README
+# dokku-litestream example - Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an example application for the [dokku-litestream plugin](https://github.com/AxelTheGerman/dokku-litestream).
 
-Things you may want to cover:
+It is based on a brand new Rails 7 application, extended with a `Post` scaffold and tweaks for deployment on Dokku.
 
-* Ruby version
+## How to use
 
-* System dependencies
+You can use this simply as a reference for bringing your SQLite app onto Dokku, use it as sample app to try out the [dokku-litestream plugin](https://github.com/AxelTheGerman/dokku-litestream) or even as a starting point for your next application.
 
-* Configuration
+### Step 1: Create a new application on your Dokku server
 
-* Database creation
+```
+# Create an app on your Dokku host
+$ dokku apps:create my-litestream-rails
 
-* Database initialization
+# Create a persistent storage directory
+$ dokku storage:ensure-directory my-litestream-rails--db
 
-* How to run the test suite
+# Mount the storage to your app
+$ dokku storage:mount /var/lib/dokku/data/storage/my-litestream-rails--db:/app/db/litestream
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Step 2: Clone this repository and deploy the application
 
-* Deployment instructions
+```
+git pull https://github.com/AxelTheGerman/dokku-litestream-example-rails.git
+cd dokku-litestream-example-rails
+git remote add dokku dokku@dokku.me:my-litestream-rails
+git push dokku
+```
 
-* ...
+### Step 3: Configure dokku-litestream
+
+Your application should be fully usable at this point - including persistent database across application restarts, deployments and in one-off dokku tasks.
+
+**But any production ready application needs database backups.**
+
+Follow the instructions over at [dokku-litestream](https://github.com/AxelTheGerman/dokku-litestream) for the latest setup instruction.
