@@ -18,7 +18,7 @@ $ dokku apps:create my-litestream-rails
 $ dokku storage:ensure-directory my-litestream-rails--db
 
 # Mount the storage to your app
-$ dokku storage:mount /var/lib/dokku/data/storage/my-litestream-rails--db:/app/db/litestream
+$ dokku storage:mount my-sqlite-application /var/lib/dokku/data/storage/my-sqlite-application--db:/app/db/litestream
 ```
 
 ### Step 2: Clone this repository and deploy the application
